@@ -11,7 +11,7 @@ describe('Issue deleting', () => {
   });
 
   const getIssueDetailsModal = () => cy.get('[data-testid="modal:issue-details"]');
-  let issueTitle = 'This is an issue of type: Task.';
+  const issueTitle = 'This is an issue of type: Task.';
 
     it('Should delete the first issue successfully', () => {
     getIssueDetailsModal().get('[data-testid="icon:trash"]').click();
