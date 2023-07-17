@@ -80,6 +80,13 @@ describe('Issue create', () => {
       cy.get('[data-testid="select:reporterId"]').click();
       cy.get('[data-testid="select-option:Pickle Rick"]').click();
 
+      //assert all values are correctly visible
+      cy.get('input[name="title"]').should('have.value', 'Bug');
+      cy.get('.ql-editor').should('have.text', 'My bug description');
+      cy.get('[data-testid="select:type"]').should('have.text', 'Bug');
+      cy.get('[data-testid="select:reporterId"]').should('have.text', 'Pickle Rick');
+      cy.get('[data-testid="select:priority"]').should('have.text', 'Highest');
+
       //Click on button "Create issue"
       cy.get('button[type="submit"]').click();
     });
@@ -129,6 +136,13 @@ describe('Issue create', () => {
       //Select Baby Yoda from reporter dropdown
       cy.get('[data-testid="select:reporterId"]').click();
       cy.get('[data-testid="select-option:Baby Yoda"]').click();
+
+      //assert all values are correctly visible
+      cy.get('input[name="title"]').should('have.value', randomTitle);
+      cy.get('.ql-editor').should('have.text', randomDescription);
+      cy.get('[data-testid="select:type"]').should('have.text', 'Task');
+      cy.get('[data-testid="select:reporterId"]').should('have.text', 'Baby Yoda');
+      cy.get('[data-testid="select:priority"]').should('have.text', 'Low');
 
       //Click on button "Create issue"
       cy.get('button[type="submit"]').click();
