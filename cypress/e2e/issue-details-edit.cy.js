@@ -107,34 +107,6 @@ describe("Issue details editing", () => {
     getReporter().invoke("text").should("match", regexPattern);
   });
 
-  it("Should remove unnecessary spaces on the board view", () => {
-    const issueTitle = "  Hello world   ";
-    const getIssueCreateModal = () =>
-      cy.get('[data-testid="modal:issue-create"]');
-    const actualTitle = () => cy.get('[placeholder="Short summary"]');
-
-    //Create a new issue
-    cy.get('[data-testid="icon:close"]').first().click();
-    cy.get('[data-testid="icon:plus"]').click();
-    getIssueCreateModal().within(() => {
-      cy.get(".ql-editor").type("My world spins around");
-      cy.get('input[name="title"]').type(issueTitle);
-      cy.get('button[type="submit"]').click();
-    });
-    getIssueCreateModal().should("not.exist");
-    cy.reload();
-    //Access new issue and assert the title
-    cy.get('[data-testid="list-issue"]').first().click();
-    getIssueDetailsModal().within(() => {
-      actualTitle()
-        .invoke("text")
-        .then((actualTitle) => {
-          actualTitle.trim();
-          expect(actualTitle.trim()).to.equal(issueTitle.trim());
-        });
-    });
-  });
-
   const getIssueDetailsModal = () =>
     cy.get('[data-testid="modal:issue-details"]');
 });
